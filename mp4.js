@@ -40,7 +40,8 @@ class MP4 {
 
 		bits.WriteInt32(data, 12, esi.streamId);
 		// reserved 4 bytes
-		var duration = Math.ceil(esi.dataOffsets.length * 1000 / 30); // fps 30, unit ms ?
+		var duration = Math.ceil(esi.dataOffsets.length * 1000 * 2);
+		// var duration = Math.ceil(esi.dataOffsets.length * 1000 / 30); // fps 30, unit ms ?
 		bits.WriteInt32(data, 20, duration);
 		// reserved 8 bytes
 
@@ -78,7 +79,8 @@ class MP4 {
 		bits.WriteInt32(data, 8, 0);
 		if (esi.streamType == "video") {
 			bits.WriteInt32(data, 12, 1200000);
-			duration = Math.ceil(esi.dataOffsets.length * 1000 / 30); // fps 30, unit ms ?
+			duration = Math.ceil(esi.dataOffsets.length * 1000 * 2); // fps 30, unit ms ?
+			// duration = Math.ceil(esi.dataOffsets.length * 1000 / 30); // fps 30, unit ms ?
 			bits.WriteInt32(data, 16, duration * 1200);
 		} else {
 			bits.WriteInt32(data, 12, 44000); // !!! fix this for audio
@@ -259,7 +261,8 @@ class MP4 {
 		bits.WriteInt32(data, 0, 0);
 		bits.WriteInt32(data, 4, 1);
 		bits.WriteInt32(data, 8, esi.dataOffsets.length);
-		bits.WriteInt32(data, 12, 40000); // 30fps, unit 1200000
+		bits.WriteInt32(data, 12, 1200000 * 2); // 30fps, unit 1200000
+		// bits.WriteInt32(data, 12, 40000); // 30fps, unit 1200000
 		return self.Box("stts", data);
 	}
 
@@ -290,7 +293,8 @@ class MP4 {
 		var data = new Uint8Array(20);
 		bits.WriteInt32(data, 0, 0);
 		bits.WriteInt32(data, 4, 1);
-		var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 / 30);
+		var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 * 2);
+		// var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 / 30);
 		bits.WriteInt32(data, 8, duration);
 		bits.WriteInt32(data, 12, 0);
 		bits.WriteInt16(data, 16, 1);
@@ -313,7 +317,8 @@ class MP4 {
 		bits.WriteInt32(data, 4, 0);
 		bits.WriteInt32(data, 8, 0);
 		bits.WriteInt32(data, 12, 1000); // millisecs
-		var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 / 30);
+		var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 * 2);
+		// var duration = Math.ceil(self.streams[1].dataOffsets.length * 1000 / 30);
 		bits.WriteInt32(data, 16, duration);
 
 		bits.WriteInt32(data, 20, 0x00010000);

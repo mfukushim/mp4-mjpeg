@@ -23,9 +23,9 @@
 		"image-size": "^0.5.3"
 	},
 	"devDependencies": {
-			"jshint": "^2.9.4"
+		"jshint": "^2.9.4"
 	},
 	"scripts": {
-			"jshint": "node_modules/jshint/bin/jshint *.js || true"
+		"jshint": "node_modules/jshint/bin/jshint *.js || true"
 	}
 }
